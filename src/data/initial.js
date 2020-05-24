@@ -3,5 +3,7 @@ import {Map, List} from "immutable";
 // Initial state, overwrite with API data
 export default Map({
   coins: [],
-  currency: "JPY"
+  currency: "USD",
+  sortOnColumn: "marketCap",
+  loading: true
 });

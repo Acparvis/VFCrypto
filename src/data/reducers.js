@@ -3,23 +3,11 @@ import {Map, fromJS, toJS} from 'immutable';
 import { //Imports the actions to be fed into the reducer switch statement.
   UPDATE_COINS,
   SORT_COINS
-} from "./actions/state"
-import sortSwitch from "../utils/sortCoins";
+} from "./actions/state";
 
-const updateCoins = (state, {value}) => state.set("coins", value);
+const updateCoins = (state, {value, currency}) => state.set("coins", value).set("currency", currency).set("loading", false);
 
-const sortCoins = (state, {column}) => state.update('coins', c => {
-    // return p.push(Map({
-    //   id: index + 1,
-    //   value: value
-    // }))
-
-    const coins = state.get("coins");
-
-    const newState = state.set("coins", sortSwitch(column, coins))
-
-    return c = sortSwitch(column, coins);
-  });
+const sortCoins = (state, {column}) => state.set("sortOnColumn", column);
 
 // Reducer switch statement.
 export default (state = initial, action) => {

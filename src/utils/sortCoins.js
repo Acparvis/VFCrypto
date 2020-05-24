@@ -1,35 +1,37 @@
 const sortSwitch = (sortOp, data) => {
-
   switch(sortOp) {
     case "crypto":
-      console.log("alphabetise");
-      break;
+      return data.sort(alphabeticalSort);
     case "price":
-      // code block
-      console.log("price");
-      break;
+      return data.sort(priceSort);
     case "marketCap":
-      // code block
-      console.log("market cap");
-      break;
+      return data.sort(marketCapSort);
     case "24h":
-      // code block
-     return dayChange(data);
+     return data.sort(dayChangeSort);
     default:
-    // code block
-      return console.log("default");
+      return data;
   }
-
-}
+};
 
 export default sortSwitch;
 
 //useful retrieval for this object structure, bypasses key changes due to different currencies
-const getFirstKey = (obj) => obj[Object.keys(obj)[0]];
+export const getFirstKey = (obj) => obj[Object.keys(obj)[0]];
+
+
+//----Sort functions for different columns
+
+//sort coins alphabetically
+const alphabeticalSort = (a, b) =>  a.CoinInfo.FullName.localeCompare(b.CoinInfo.FullName);
+
+//sort coins by price
+const priceSort = (a, b) =>  getFirstKey(b.RAW).PRICE - getFirstKey(a.RAW).PRICE;
+
+//sort coins by market cap
+const marketCapSort = (a, b) =>  getFirstKey(b.RAW).MKTCAP - getFirstKey(a.RAW).MKTCAP;
 
 //sorts coins by 24hr percent change
 const dayChangeSort = (a, b) =>  getFirstKey(b.RAW).CHANGEPCT24HOUR - getFirstKey(a.RAW).CHANGEPCT24HOUR;
 
-const dayChange = (coins) => {
-  return coins.sort(dayChangeSort);
-}
+
+

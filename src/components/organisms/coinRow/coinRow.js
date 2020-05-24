@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import numeral from 'numeral';
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 
 const PercentRow = styled.td`
       color: ${props => props.value < 0 ? "red" : "green"};
@@ -47,10 +48,10 @@ class CoinRow extends Component {
   render() {
     const {PRICE, MKTCAP, CHANGEPCT24HOUR} = this.getRawData(this.props.coin);
     const {Name, FullName, ImageUrl} = this.props.coin.CoinInfo;
-    const {index} = this.props;
+    const {index, history} = this.props;
 
     return (
-      <CoinTableRow onClick={() => alert(Name)}>
+      <CoinTableRow onClick={() => history.push(`/coin/${Name}`)}>
         <IconCell>
           {index + 1}
           <CoinIcon src={`https://www.cryptocompare.com${ImageUrl}`}/>
@@ -59,10 +60,12 @@ class CoinRow extends Component {
         <td>{this.getCurrencySymbol(this.props.coin) + " "}{<NameSpan>{numeral(PRICE).format('0,0.00')}</NameSpan>}</td>
         <td>{this.getCurrencySymbol(this.props.coin) + " "}{ <NameSpan>{numeral(MKTCAP).format('0,0.00')}</NameSpan>}</td>
         <PercentRow
-          value={numeral(CHANGEPCT24HOUR).format('0.00')}>{numeral(CHANGEPCT24HOUR).format('0.00')}</PercentRow>
+          value={numeral(CHANGEPCT24HOUR).format('0.00')}
+        >{numeral(CHANGEPCT24HOUR).format('0.00')}
+        </PercentRow>
       </CoinTableRow>
     );
   }
 }
 
-export default CoinRow;
+export default withRouter(CoinRow);

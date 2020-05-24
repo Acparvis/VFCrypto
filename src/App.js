@@ -1,15 +1,7 @@
 import React from 'react';
 import './App.css';
-import CoinList from "./components/coinList/coinList";
+import Routes from "./Routes";
 
-function App() {
-  return (
-    <div className="App">
-      <header>
-        <CoinList/>
-      </header>
-    </div>
-  );
-}
+const App = () => <Routes/>
 
 export default App;
