@@ -1,5 +1,4 @@
 import initial from "./initial";
-import {Map, fromJS, toJS} from 'immutable';
 import { //Imports the actions to be fed into the reducer switch statement.
   UPDATE_COINS,
   SORT_COINS

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import NavBar from "../../organisms/navBar/NavBar";
 import CoinFullview from "../../organisms/coinFullview/coinFullview";
 

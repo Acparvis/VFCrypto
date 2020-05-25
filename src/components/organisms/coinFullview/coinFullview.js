@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {fetchCoins, setLoading} from "../../../data/actions/state";
+import {fetchCoins} from "../../../data/actions/state";
 import {getCoin, getCoinIndex} from "../../../utils/getCoin";
 import {getFirstKey} from "../../../utils/sortCoins";
 import styled from "styled-components";

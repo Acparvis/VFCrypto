@@ -73,7 +73,7 @@ const renderCoinInfo = (coin) => {
 
   return (
     <>
-      {!!coin?.CoinInfo?.ImageUrl && <img src={`https://www.cryptocompare.com${coin?.CoinInfo?.ImageUrl}`}/>}
+      {!!coin?.CoinInfo?.ImageUrl && <img src={`https://www.cryptocompare.com${coin?.CoinInfo?.ImageUrl}`} alt={`${coin?.CoinInfo?.FullName} icon`}/>}
       <div>
         <h2>{coin?.CoinInfo?.FullName}</h2>
         <h3>{coin?.CoinInfo?.Name}</h3>
