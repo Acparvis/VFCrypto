@@ -2,11 +2,60 @@ import React, {Component} from 'react';
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import {fetchCoins, setLoading} from "../../../data/actions/state";
 import {getCoin} from "../../../utils/getCoin";
 import {BackButton} from "../../atoms/backButton/backButton";
-import { getRawData } from "../../../utils/getRawData";
+import {getRawData} from "../../../utils/getRawData";
 import {getCurrencySymbol} from "../../../utils/getCurrencySymbol";
+import styled from "styled-components";
+import numeral from "numeral";
+
+const CoinHeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  a{
+    color: #5E738F;
+    
+    svg{
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      background: #E7F2FD;
+       color: #66A7E8;
+       padding: 3px;
+    }
+  }
+  
+  * {
+    margin: 5px;
+  }
+  
+  img{
+    height: 40px;
+    width: 40px;
+  }
+  
+  h2{
+    font-size: 20px;
+    font-weight: 300;
+    margin: 0px;
+  }
+  
+  h3{
+    color: #5E738F;
+    font-size: 12px;
+    margin: 0px;
+  }
+  
+  p {
+    font-size: 20px;
+    
+    > span{
+        color: #5E738F;
+    }
+  }
+`;
 
 const mapStateToProps = state => {
   let coins = state.get("coins");
@@ -18,22 +67,18 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => ({
-  coinsFetch: (currency) => dispatch(fetchCoins(currency)),
-  loadingSet: (value) => dispatch(setLoading(value)),
-});
-
-
 const renderCoinInfo = (coin) => {
   const rawData = getRawData(coin);
 
 
   return (
     <>
-      <img src={`https://www.cryptocompare.com${coin?.CoinInfo?.ImageUrl}`}/>
-      <h2>{coin?.CoinInfo?.FullName}</h2>
-      <h3>{coin?.CoinInfo?.Name}</h3>
-      <p>{getCurrencySymbol(coin) + " "}{rawData?.PRICE}</p>
+      {!!coin?.CoinInfo?.ImageUrl && <img src={`https://www.cryptocompare.com${coin?.CoinInfo?.ImageUrl}`}/>}
+      <div>
+        <h2>{coin?.CoinInfo?.FullName}</h2>
+        <h3>{coin?.CoinInfo?.Name}</h3>
+      </div>
+      <p><span>{getCurrencySymbol(coin) + " "}</span>{numeral(rawData?.PRICE).format('0,0.00')}</p>
     </>
   )
 }
@@ -44,11 +89,10 @@ class CoinHeader extends Component {
     const {coin} = this.props?.match?.params;
 
     return (
-      <div>
+      <CoinHeaderContainer>
         <BackButton/>
-        {console.log(getCoin(coin, coins))}
         {renderCoinInfo(getCoin(coin, coins))}
-      </div>
+      </CoinHeaderContainer>
     );
   }
 }

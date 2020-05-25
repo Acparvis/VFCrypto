@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {fetchCoins, sortCoins, setLoading } from "../../../data/actions/state";
-import CoinRow from "../coinRow/coinRow";
+import CoinRow from "../../molecule/coinRow/coinRow";
 import styled from "styled-components";
 import sortSwitch from "../../../utils/sortCoins";
 import { BeatLoader } from "react-spinners";

@@ -15,7 +15,12 @@ const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
+  min-height: 80px; 
+`;
+
+const Heading = styled.h1`
+  font-weight: normal;
 `;
 
 const mapStateToProps = state => {
@@ -55,7 +60,7 @@ class NavBar extends Component {
         {!!match?.params?.coin ? <CoinHeader/> :
           (
             <>
-              <h1>VFCrypto</h1>
+              <Heading>VFCrypto</Heading>
               {this.getLastUpdate() && <p>Last Update: {this.getLastUpdate()}</p>}
             </>
           )
