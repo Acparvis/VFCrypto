@@ -4,10 +4,14 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 import { getCurrencySymbol } from "../../../utils/getCurrencySymbol";
 import { getRawData } from "../../../utils/getRawData";
+import {BsArrowUpShort, BsArrowDownShort} from "react-icons/bs";
 
 const PercentRow = styled.td`
       color: ${props => props.value < 0 ? "red" : "green"};
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 `;
 
 const CoinTableRow = styled.tr`
@@ -38,9 +42,6 @@ const NameSpan = styled.span`
 `;
 
 class CoinRow extends Component {
-
-
-
   render() {
     const {PRICE, MKTCAP, CHANGEPCT24HOUR} = getRawData(this.props.coin);
     const {Name, FullName, ImageUrl} = this.props.coin.CoinInfo;
@@ -57,7 +58,8 @@ class CoinRow extends Component {
         <td>{getCurrencySymbol(this.props.coin) + " "}{ <NameSpan>{numeral(MKTCAP).format('0,0.00')}</NameSpan>}</td>
         <PercentRow
           value={numeral(CHANGEPCT24HOUR).format('0.00')}
-        >{numeral(CHANGEPCT24HOUR).format('0.00')}
+        >{numeral(CHANGEPCT24HOUR).format('0.00') + "%"}
+        {CHANGEPCT24HOUR > 0 ? <BsArrowUpShort/> : <BsArrowDownShort/>}
         </PercentRow>
       </CoinTableRow>
     );

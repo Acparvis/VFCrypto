@@ -33,6 +33,13 @@ const TableHeaderRow = styled.th`
   color: ${props => props.orderCol ? "black" : "inherit"};
 `;
 
+const SpinnerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 
 const mapStateToProps = state => {
   let coins = state.get("coins");
@@ -70,11 +77,10 @@ class CoinList extends Component {
     const {coins, column, loading} = this.props;
 
     // if no coins in array, assumed loading state
-    if (loading) return <BeatLoader/>;
+    if (loading) return <SpinnerContainer><BeatLoader/></SpinnerContainer>;
 
     return (
       <Table>
-
         <TableHeader>
           <tr>
             {columns.map((col, i) => <TableHeaderRow key={i} onClick={() => this.props.coinsSort(col.value)} orderCol={col.value === column}>{col.heading}</TableHeaderRow>)}
