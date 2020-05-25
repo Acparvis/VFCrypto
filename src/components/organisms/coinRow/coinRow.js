@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import numeral from 'numeral';
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
+import { getCurrencySymbol } from "../../../utils/getCurrencySymbol";
+import { getRawData } from "../../../utils/getRawData";
 
 const PercentRow = styled.td`
       color: ${props => props.value < 0 ? "red" : "green"};
@@ -36,17 +38,11 @@ const NameSpan = styled.span`
 `;
 
 class CoinRow extends Component {
-  round = number => Number.parseFloat(number).toFixed(2);
 
-  getDisplayData = coin => coin.DISPLAY[Object.keys(coin.DISPLAY)[0]];
-
-  getRawData = coin => coin.RAW[Object.keys(coin.RAW)[0]];
-
-  getCurrencySymbol = coin => coin.DISPLAY[Object.keys(coin.DISPLAY)[0]].CHANGE24HOUR.charAt(0);
 
 
   render() {
-    const {PRICE, MKTCAP, CHANGEPCT24HOUR} = this.getRawData(this.props.coin);
+    const {PRICE, MKTCAP, CHANGEPCT24HOUR} = getRawData(this.props.coin);
     const {Name, FullName, ImageUrl} = this.props.coin.CoinInfo;
     const {index, history} = this.props;
 
@@ -57,8 +53,8 @@ class CoinRow extends Component {
           <CoinIcon src={`https://www.cryptocompare.com${ImageUrl}`}/>
           <NameSpan>{FullName}</NameSpan>
         </IconCell>
-        <td>{this.getCurrencySymbol(this.props.coin) + " "}{<NameSpan>{numeral(PRICE).format('0,0.00')}</NameSpan>}</td>
-        <td>{this.getCurrencySymbol(this.props.coin) + " "}{ <NameSpan>{numeral(MKTCAP).format('0,0.00')}</NameSpan>}</td>
+        <td>{getCurrencySymbol(this.props.coin) + " "}{<NameSpan>{numeral(PRICE).format('0,0.00')}</NameSpan>}</td>
+        <td>{getCurrencySymbol(this.props.coin) + " "}{ <NameSpan>{numeral(MKTCAP).format('0,0.00')}</NameSpan>}</td>
         <PercentRow
           value={numeral(CHANGEPCT24HOUR).format('0.00')}
         >{numeral(CHANGEPCT24HOUR).format('0.00')}

@@ -16,7 +16,9 @@ const sortSwitch = (sortOp, data) => {
 export default sortSwitch;
 
 //useful retrieval for this object structure, bypasses key changes due to different currencies
-export const getFirstKey = (obj) => obj[Object.keys(obj)[0]];
+export const getFirstKey = (obj) => {
+  if (!!obj) return obj[Object.keys(obj)[0]];
+}
 
 
 //----Sort functions for different columns

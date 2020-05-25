@@ -1,0 +1,1 @@
+export const getCurrencySymbol = coin => coin?.DISPLAY[Object.keys(coin?.DISPLAY)[0]]?.CHANGE24HOUR.charAt(0);

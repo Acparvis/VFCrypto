@@ -1,0 +1,1 @@
+export const getRawData = coin => coin?.RAW[Object.keys(coin?.RAW)[0]];

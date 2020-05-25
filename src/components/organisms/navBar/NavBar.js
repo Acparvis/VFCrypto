@@ -7,9 +7,7 @@ import {getFirstKey} from "../../../utils/sortCoins";
 import moment from "moment";
 import styled from "styled-components";
 import {withRouter} from "react-router-dom";
-import {BackButton} from "../../molecule/backButton";
-
-
+import CoinHeader from "../../molecule/coinHeader/coinHeader";
 
 const Header = styled.div`
   width: 80%;
@@ -54,7 +52,7 @@ class NavBar extends Component {
 
     return (
       <Header>
-        {!!match?.params?.coin ? <BackButton/> :
+        {!!match?.params?.coin ? <CoinHeader/> :
           (
             <>
               <h1>VFCrypto</h1>
@@ -63,7 +61,7 @@ class NavBar extends Component {
           )
         }
         <select value={currency} onChange={(e) => this.getCoinData(e.target.value)}>
-          {currencies.map((curr) => <option value={curr}>{curr}</option>)}
+          {currencies.map((curr, i) => <option key={i} value={curr}>{curr}</option>)}
         </select>
       </Header>
     );

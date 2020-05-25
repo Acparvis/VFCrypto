@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route} from "react-router-dom";
 import {Home} from "./components/views/home/Home";
-import CoinView from "./components/views/coinView/CoinView";
+import {CoinView} from "./components/views/coinView/CoinView";
 
 export const Routing = {
   home: "/",

@@ -1,21 +1,12 @@
 import React, {Component} from 'react';
-import { withRouter } from "react-router";
 import NavBar from "../../organisms/navBar/NavBar";
+import CoinFullview from "../../organisms/coinFullview/coinFullview";
 
-
-
-class CoinView extends Component {
-  render() {
-    const { location } = this.props;
-
+export const CoinView = () => {
     return (
-      <div>
+      <>
         <NavBar/>
-        {JSON.stringify(location)}
-      </div>
+        <CoinFullview/>
+      </>
     );
-  }
 }
-
-
-export default withRouter(CoinView);
